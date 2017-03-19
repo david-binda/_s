@@ -94,6 +94,18 @@ function _s_get_template_part( $slug, $name = null ) {
 			 */
 			do_action( "_s_after_get_template_part", $slug, $name, $templates, $located_template );
 		} else {
+
+			/**
+			 * Fires in case specified template part file is not loaded.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string|null   $name               The name of the specialized template.
+			 * @param array         $templates          Template file(s) to search for, in order.
+			 * @param string        $located_template   The template filename if one is located.
+			 */
+			do_action( "_s_template_not_loaded_{$slug}", $name, $templates, $located_template );
+
 			/**
 			 * Fires in case specified template part file is not loaded.
 			 *
