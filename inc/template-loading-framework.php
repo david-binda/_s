@@ -35,9 +35,6 @@ function _s_get_template_part( $slug, $name = null ) {
 		/**
 		 * Fires before the specified template part file is loaded.
 		 *
-		 * The dynamic portion of the hook name, `$slug`, refers to the slug name
-		 * for the generic template part.
-		 *
 		 * @since 1.0.0
 		 *
 		 * @param string      $slug     The slug name for the generic template.
@@ -51,9 +48,6 @@ function _s_get_template_part( $slug, $name = null ) {
 
 		/**
 		 * Fires before the specified template part file is loaded.
-		 *
-		 * The dynamic portion of the hook name, `$slug`, refers to the slug name
-		 * for the generic template part.
 		 *
 		 * @since 1.0.0
 		 *
@@ -97,6 +91,9 @@ function _s_get_template_part( $slug, $name = null ) {
 
 			/**
 			 * Fires in case specified template part file is not loaded.
+			 *
+			 * The dynamic portion of the hook name, `$slug`, refers to the slug name
+			 * for the generic template part.
 			 *
 			 * @since 1.0.0
 			 *
