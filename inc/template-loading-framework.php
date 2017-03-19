@@ -46,33 +46,65 @@ function _s_get_template_part( $slug, $name = null ) {
 		 */
 		do_action( "_s_before_get_template_part", $slug, $name, $templates );
 
-		$located_template = locate_template( $templates, true, false );
+		$require_once = false;
+		$located_template = locate_template( $templates, false, $require_once );
 
 		/**
-		 * Fires after the specified template part file is loaded.
+		 * Fires before the specified template part file is loaded.
 		 *
 		 * The dynamic portion of the hook name, `$slug`, refers to the slug name
 		 * for the generic template part.
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param string      $slug             The slug name for the generic template.
-		 * @param string|null $name             The name of the specialized template.
-		 * @param array       $templates        Template file(s) to search for, in order.
-		 * @param string      $located_template The template filename if one is located.
+		 * @param string        $slug               The slug name for the generic template.
+		 * @param string|null   $name               The name of the specialized template.
+		 * @param array         $templates          Template file(s) to search for, in order.
+		 * @param string        $located_template   The template filename if one is located.
 		 */
-		do_action( "_s_after_get_template_part_{$slug}", $slug, $name, $templates, $located_template );
+		do_action( "_s_before_get_template_part", $slug, $name, $templates, $located_template );
 
-		/**
-		 * Fires after the specified template part file is loaded.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param string      $slug             The slug name for the generic template.
-		 * @param string|null $name             The name of the specialized template.
-		 * @param array       $templates        Template file(s) to search for, in order.
-		 * @param string      $located_template The template filename if one is located.
-		 */
-		do_action( "_s_after_get_template_part", $slug, $name, $templates, $located_template );
+		if ( '' != $located_template ) {
+			load_template( $located_template, $require_once );
+
+			/**
+			 * Fires after the specified template part file is loaded.
+			 *
+			 * The dynamic portion of the hook name, `$slug`, refers to the slug name
+			 * for the generic template part.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string        $slug               The slug name for the generic template.
+			 * @param string|null   $name               The name of the specialized template.
+			 * @param array         $templates          Template file(s) to search for, in order.
+			 * @param string        $located_template   The template filename if one is located.
+			 */
+			do_action( "_s_after_get_template_part_{$slug}", $slug, $name, $templates, $located_template );
+
+			/**
+			 * Fires after the specified template part file is loaded.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string        $slug               The slug name for the generic template.
+			 * @param string|null   $name               The name of the specialized template.
+			 * @param array         $templates          Template file(s) to search for, in order.
+			 * @param string        $located_template   The template filename if one is located.
+			 */
+			do_action( "_s_after_get_template_part", $slug, $name, $templates, $located_template );
+		} else {
+			/**
+			 * Fires in case specified template part file is not loaded.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string        $slug               The slug name for the generic template.
+			 * @param string|null   $name               The name of the specialized template.
+			 * @param array         $templates          Template file(s) to search for, in order.
+			 * @param string        $located_template   The template filename if one is located.
+			 */
+			do_action( "_s_template_not_loaded", $slug, $name, $templates, $located_template );
+		}
 	}
 }
