@@ -141,3 +141,8 @@ require get_template_directory() . '/inc/customizer.php';
  * Load Jetpack compatibility file.
  */
 require get_template_directory() . '/inc/jetpack.php';
+
+/**
+ * Load extended template loading framework
+ */
+require get_template_directory() . '/inc/template-loading-framework.php';
