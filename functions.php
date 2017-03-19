@@ -146,3 +146,8 @@ require get_template_directory() . '/inc/jetpack.php';
  * Load extended template loading framework
  */
 require get_template_directory() . '/inc/template-loading-framework.php';
+
+/**
+ * Load debugger
+ */
+require get_template_directory() . '/inc/debugging.php';
