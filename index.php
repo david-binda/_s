@@ -20,13 +20,8 @@ get_header(); ?>
 		<?php
 		if ( have_posts() ) :
 
-			if ( is_home() && ! is_front_page() ) : ?>
-				<header>
-					<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
-				</header>
-
-			<?php
-			endif;
+			// Include a hidden H1 on index when a page is set to front and the posts page is also set to a page
+			_s_get_template_part( 'template-parts/hidden-h1' );
 
 			/* Start the Loop */
 			while ( have_posts() ) : the_post();
@@ -40,7 +35,7 @@ get_header(); ?>
 
 			endwhile;
 
-			the_posts_navigation();
+			_s_get_template_part( 'template-parts/post-navigation', get_post_format() );
 
 		else :
 
